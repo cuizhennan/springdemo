@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.monkeycoding.servers.mybatis.mapper.TCompanyMapper">
+  <resultMap id="BaseResultMap" type="xyz.monkeycoding.servers.mybatis.model.TCompany">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
+    <result column="contact_email" jdbcType="VARCHAR" property="contactEmail" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="member_count" jdbcType="INTEGER" property="memberCount" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="create_dt" jdbcType="TIMESTAMP" property="createDt" />
+    <result column="update_dt" jdbcType="TIMESTAMP" property="updateDt" />
+    <result column="company_state" jdbcType="TINYINT" property="companyState" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xyz.monkeycoding.servers.mybatis.model.TCompany">
+    insert into t_company (id, uid, parent_id, 
+      name, address, contact_phone, 
+      contact_email, full_name, member_count, 
+      version, group_id, create_dt, 
+      update_dt, company_state)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{contactEmail,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{memberCount,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, #{createDt,jdbcType=TIMESTAMP}, 
+      #{updateDt,jdbcType=TIMESTAMP}, #{companyState,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="xyz.monkeycoding.servers.mybatis.model.TCompany">
+    update t_company
+    set uid = #{uid,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      contact_email = #{contactEmail,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      member_count = #{memberCount,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=INTEGER},
+      create_dt = #{createDt,jdbcType=TIMESTAMP},
+      update_dt = #{updateDt,jdbcType=TIMESTAMP},
+      company_state = #{companyState,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, uid, parent_id, name, address, contact_phone, contact_email, full_name, 
+    member_count, version, group_id, create_dt, update_dt, company_state
+    from t_company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, uid, parent_id, name, address, contact_phone, contact_email, full_name, 
+    member_count, version, group_id, create_dt, update_dt, company_state
+    from t_company
+  </select>
+</mapper>

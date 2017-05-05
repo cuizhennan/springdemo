@@ -22,7 +22,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="xyz.monkeycoding.services" level="debug"
+    <logger name="xyz.monkeycoding.servers" level="debug"
             additivity="false">
         <appender-ref ref="FILE-AUDIT"/>
     </logger>

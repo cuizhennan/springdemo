@@ -55,7 +55,7 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="basePackage">
             <value>
-                xyz.monkeycoding.servers.mybatis.mapper,
+                cn.rongcloud.rce.servers.mapper,
             </value>
         </property>
     </bean>
@@ -67,7 +67,7 @@
 
     <aop:config>
         <aop:pointcut id="serviceMethods"
-                      expression="execution(* xyz.monkeycoding.servers.services..*(..))"/>
+                      expression="execution(* cn.rongcloud.rce.servers.services..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 

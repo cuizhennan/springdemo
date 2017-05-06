@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <property name="DEV_HOME" value="logs"/>
+<configuration scan="true" scanPeriod="30 seconds" debug="false" packagingData="true">
+    <contextName>SpringDemo</contextName>
 
-    <appender name="FILE-AUDIT"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--log dir-->
+    <property name="DEV_HOME" value="./../logs"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+
+        <encoder>
+            <!-- pattern模式 %d时间 %thread 线程名 %level行为级别 %logger logger名称 %method 方法名称 %message 调用方法的入参消息 -->
+            <pattern>%-4d [%thread] %highlight%-5level %cyan%logger.%-10method - %message%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--log output file-->
+    <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${DEV_HOME}/debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
@@ -13,22 +27,23 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${DEV_HOME}/archived/debug.%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>
+                ${DEV_HOME}/archived/debug.%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
 
-    <logger name="xyz.monkeycoding.servers" level="debug"
-            additivity="false">
-        <appender-ref ref="FILE-AUDIT"/>
-    </logger>
+    <!--<logger name="xyz.monkeycoding.servers" level="debug" additivity="false">-->
+    <!--<appender-ref ref="FILE-AUDIT"/>-->
+    <!--</logger>-->
 
-    <root level="error">
+    <root level="info">
         <appender-ref ref="FILE-AUDIT"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 
 </configuration>

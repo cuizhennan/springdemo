@@ -77,7 +77,7 @@ public class LoginController {
         return new WebAsyncTask<>(callable);
     }
 
-    @Scheduled(fixedRate = 5000)
+//    @Scheduled(fixedRate = 5000)
     public void processQueues() {
         logger.info("process start {}", System.currentTimeMillis());
         Jedis jedis = jedisPool.getResource();

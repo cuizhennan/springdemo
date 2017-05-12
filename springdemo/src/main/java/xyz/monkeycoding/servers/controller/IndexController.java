@@ -49,18 +49,4 @@ public class IndexController {
         responseBodyQueue.add(result);
         return result;
     }
-
-//    @Scheduled(fixedRate = 3000)
-    public void processQueues() {
-        logger.info("process start {}", System.currentTimeMillis());
-
-        for (DeferredQuote result : responseBodyQueue) {
-            // Quote quote = jpaStockQuoteRepository.findStock(result.symbol);
-            Quote quote = new Quote();
-            quote.setData(System.currentTimeMillis() + ": " + atomicInteger.getAndIncrement());
-            result.setResult(quote);
-            logger.info("result ==> {}", quote);
-            responseBodyQueue.remove(result);
-        }
-    }
 }
